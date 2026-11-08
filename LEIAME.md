@@ -23,6 +23,7 @@ cabeçalho e o rodapé ficaram na mesma posição, ao pixel, de antes da mudanç
 | `fontes\*.woff2` | Austin News Headline (logotipo), Deck ("Em breve."), Text roman (rodapé) e Text italic No 2 ("Contato"), cortadas para as letras que a página usa. Têm os mesmos nomes das de `..\fontes`. |
 | `favicon.svg`, `icone-180.png` | Ícone da aba e da tela inicial do celular (os do sítio). |
 | `.nojekyll` | Arquivo vazio: o GitHub Pages publica os arquivos como estão, sem processá-los. |
+| `CNAME` | Criado pelo GitHub em 08/11/2026, ao registrar o domínio em Settings → Pages. Uma linha só; não apague, senão o domínio sai do Pages. |
 | `LEIAME.md` | Este arquivo. Pode ficar de fora do upload. |
 
 Todos os caminhos são relativos. É isso que faz a página abrir igual em
@@ -78,25 +79,38 @@ cd C:/Projetos/textos.etc.br/provisoria; git add -A; git commit -m "Descreva a m
 
 O trecho com `credential.helper` usa o login do GitHub CLI (`gh`): não pede senha e não
 mexe na configuração do git. O Pages republica sozinho em cerca de um minuto. Para ver
-antes o que vai subir, rode `git status` e `git diff`.
+antes o que vai subir, rode `git status` e `git diff`. Se o push for recusado (`rejected`,
+`fetch first`), o GitHub tem um commit que a pasta não tem (foi o caso do `CNAME`): rode
+`git pull --ff-only` e repita a linha.
 
 ## Usar o domínio textos.etc.br
 
-Não há arquivo `CNAME` aqui, de propósito: com ele no lugar, o endereço `github.io`
-passa a redirecionar para `textos.etc.br`, e a página só abriria depois que o DNS
-apontasse. Para ver a página antes de mexer no DNS, publique primeiro sem ele.
+**Feito em 08/11/2026: `https://textos.etc.br/` está no ar, com HTTPS.** A ordem que
+funcionou, e a que o GitHub recomenda, é DNS primeiro e domínio no GitHub depois: com o
+`CNAME` no repositório antes de o DNS apontar, o endereço `github.io` redirecionaria para
+um domínio que ainda não abre.
 
-1. **Settings → Pages → Custom domain**: `textos.etc.br`, **Save**. O GitHub cria o
-   `CNAME` no repositório. (Também serve criar à mão um arquivo `CNAME` com uma única
-   linha: `textos.etc.br`.)
-2. No painel de DNS do domínio (o do Registro.br, se for ele quem hospeda o DNS), quatro
-   registros **A** apontando para os IPs do GitHub Pages: `185.199.108.153`,
-   `185.199.109.153`, `185.199.110.153` e `185.199.111.153`. Para IPv6, quatro
-   registros **AAAA**: `2606:50c0:8000::153` até `2606:50c0:8003::153`. Os números são
-   da documentação do GitHub ("Managing a custom domain for your GitHub Pages site") e
-   podem mudar: confira lá antes de digitar.
-3. Quando o GitHub validar o domínio (de minutos a algumas horas), marque
-   **Enforce HTTPS** em Settings → Pages. O certificado é gratuito.
+1. No painel de DNS do domínio (o do Registro.br, que hospeda o DNS), quatro registros
+   **A** para `textos.etc.br` apontando para os IPs do GitHub Pages: `185.199.108.153`,
+   `185.199.109.153`, `185.199.110.153` e `185.199.111.153`. Para IPv6, quatro registros
+   **AAAA**: `2606:50c0:8000::153` até `2606:50c0:8003::153` (não foram usados). Os números
+   são da documentação do GitHub ("Managing a custom domain for your GitHub Pages site") e
+   podem mudar: confira lá antes de digitar. Para ver se já valem:
+   `Resolve-DnsName textos.etc.br -Type A -Server 8.8.8.8`.
+2. **Settings → Pages → Custom domain**: `textos.etc.br`, **Save**. Pelo terminal:
+   `gh api -X PUT repos/<usuário>/<repositório>/pages -f cname=textos.etc.br`. O GitHub cria
+   um commit "Create CNAME" no repositório: rode `git pull --ff-only` na pasta, senão o
+   próximo push é recusado.
+3. O certificado (Let's Encrypt, emitido pelo GitHub) saiu em cerca de 2 minutos; o atual
+   vale até 06/02/2027 e o GitHub o renova sozinho. Então marque **Enforce HTTPS** em
+   Settings → Pages, ou, pelo terminal:
+   `gh api -X PUT repos/<usuário>/<repositório>/pages -F https_enforced=true`.
+
+Como ficou: `http://` e `www` redirecionam para `https://textos.etc.br/`, e o endereço antigo
+do `github.io` também. O domínio está com DNSSEC (servidores `*.sec.dns.br` do Registro.br);
+o Pages funciona com ele. O `www` tem os mesmos 4 registros A, o que funciona (o certificado
+cobre o `www`); o GitHub recomenda trocá-los por um `CNAME` do `www` para
+`<usuário>.github.io`, mas é opcional.
 
 O `<link rel="canonical">` e o `og:url` já apontam para `https://textos.etc.br/`.
 
