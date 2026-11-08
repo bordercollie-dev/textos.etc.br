@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>textos.etc.br — em breve</title>
+<meta name="description" content="Tradução, revisão, preparação de textos, diagramação, formatação e redação. Em breve.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f4f4f4">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="textos.etc.br">
+<meta property="og:title" content="textos.etc.br — em breve">
+<meta property="og:description" content="Tradução, revisão, preparação de textos, diagramação, formatação e redação. Em breve.">
+<meta property="og:url" content="https://textos.etc.br/">
+
+<link rel="canonical" href="https://textos.etc.br/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="preload" href="fontes/headline-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fontes/deck-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fontes/text-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fontes/text-no2-italic.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Página provisória: HTML e CSS num arquivo só, sem JavaScript. Os caminhos são
+     todos relativos, para funcionar tanto em usuario.github.io/repositorio/ quanto
+     no domínio próprio. Ver LEIAME.md. -->
+<style>
+/* Austin News, cortada para os glifos desta página (comando no LEIAME.md). */
+@font-face { font-family: "Austin Headline"; src: url("fontes/headline-roman.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Austin Deck"; src: url("fontes/deck-roman.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Austin Text"; src: url("fontes/text-roman.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Austin Text"; src: url("fontes/text-no2-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+
+/* Reservas: a Georgia, calçada com as métricas da Austin, para o logotipo e o
+   rodapé não mudarem de largura enquanto a fonte chega. Os números são do
+   estilo.css do sítio, onde estão derivados. */
+@font-face { font-family: "Reserva Headline"; src: local("Georgia"); size-adjust: 87.385%; ascent-override: 102.9%; descent-override: 24.8%; line-gap-override: 0%; }
+@font-face { font-family: "Reserva Text"; src: local("Georgia"); font-weight: 400; size-adjust: 104.919%; ascent-override: 90.74%; descent-override: 19.54%; line-gap-override: 0%; }
+@font-face { font-family: "Reserva Text"; src: local("Georgia"); font-weight: 500; size-adjust: 106.770%; ascent-override: 89.16%; descent-override: 19.20%; line-gap-override: 0%; }
+
+:root {
+  --papel: #f4f4f4;
+  --tinta: #1a1a1a;
+  --tinta-media: #565656;
+  --tinta-clara: #6e6e6e;
+  --filete: #6e6e6e;
+  --selecao: #d5d5d5;
+
+  --margem: clamp(1.25rem, 4vw, 5rem);
+  --sangria: 0.31983cqw;                       /* o filete avança além do texto */
+  --corpo: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+  --pauta: calc(var(--corpo) * 1.6);
+  --marca-fator: 4.690;                        /* largura do logotipo, em em */
+  --nome: calc(100cqw / 28);                   /* o corpo dos nomes da capa */
+  --text-x: calc(0.534 / 0.505);               /* altura de x da Austin Text */
+  color-scheme: light;
+}
+@media (max-width: 68rem) {
+  :root { --nome: clamp(1.6rem, 1.1rem + 2.1vw, 2.25rem); }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Austin Text", "Reserva Text", Georgia, serif;
+  font-size: var(--corpo);
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga";
+}
+::selection { background: var(--selecao); color: var(--tinta); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--tinta); outline-offset: 4px; border-radius: 0; }
+
+/* A folha é o contêiner: 100cqw é a largura útil, sem a barra de rolagem. */
+.folha {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0 var(--margem) calc(2.5 * var(--pauta));
+  container-type: inline-size;
+  overflow-x: clip;
+}
+
+/* Cabeçalho: só o Contato, no canto, centrado no branco acima do logotipo. */
+.topo {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 calc(-1 * var(--sangria));
+  padding: calc(0.75 * var(--pauta)) var(--sangria) 0;
+}
+.topo nav {
+  display: flex;
+  position: relative;
+  top: max(0px, calc((3.889cqw - 0.75 * var(--pauta) + 3.4px) / 2));
+}
+.topo a {
+  font-family: "Austin Text", "Reserva Text", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--tinta-media);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.topo a:hover { color: var(--tinta); border-bottom-color: var(--tinta); }
+
+/* O logotipo: o corpo é a largura útil dividida pela largura dele em em. */
+.marca {
+  margin: 0.07em 0 0;
+  font-family: "Austin Headline", "Reserva Headline", Georgia, serif;
+  font-weight: 400;
+  font-size: calc((100vw - 2 * var(--margem)) / var(--marca-fator));
+  font-size: calc(100cqw / var(--marca-fator));
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+.marca .ponto { color: var(--tinta-media); }
+.regua {
+  margin: 0.02em calc(-1 * var(--sangria)) 0;
+  border: 0;
+  border-top: 2px solid var(--filete);
+  font-size: calc(100cqw / var(--marca-fator));   /* o em é o do logotipo */
+}
+
+/* O aviso ocupa o lugar da linha de serviços da capa: Austin Deck, no corpo dos nomes. */
+main { padding-bottom: calc(3 * var(--pauta)); }
+.breve {
+  margin: 1.1em 0 0;
+  font-family: "Austin Deck", Georgia, serif;
+  font-weight: 400;
+  font-size: var(--nome);
+  line-height: 1.1;
+  letter-spacing: -0.008em;
+}
+
+/* Rodapé: colofão à esquerda, contatos à direita; desce até o pé da tela. */
+.rodape {
+  margin: auto calc(-1 * var(--sangria)) 0;
+  padding: calc(0.75 * var(--pauta)) var(--sangria) 0;
+  border-top: 2px solid var(--filete);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--tinta-clara);
+}
+.colofao {
+  font-family: "Austin Text", "Reserva Text", Georgia, serif;
+  font-size: calc(1em * var(--text-x));
+  line-height: 1.4484;
+  text-transform: lowercase;
+}
+.contato {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 1.25rem;
+  font-family: "Austin Text", "Reserva Text", Georgia, serif;
+  font-size: calc(1em * var(--text-x));
+}
+.contato a { color: var(--tinta-media); text-decoration: none; }
+.contato a:hover { color: var(--tinta); }
+.rotulo { border-bottom: 1px solid var(--filete); padding-bottom: 1px; transition: border-color 140ms ease; }
+.contato a:hover .rotulo { border-bottom-color: var(--tinta); }
+
+/* Os glifos oficiais da Meta, escalados e sem mais nada. */
+.selo { width: 1.2em; height: 1.2em; vertical-align: calc(-0.218em - 2px); }
+.selo-quadro { margin-left: 0.181em; }
+.selo-balao { margin-left: 0.207em; }
+
+@media (prefers-reduced-motion: reduce) { .rotulo { transition: none; } }
+</style>
+</head>
+
+<body>
+<div class="folha">
+
+  <header class="topo">
+    <nav aria-label="Contato"><a href="mailto:contato&#64;textos.etc.br">Contato</a></nav>
+  </header>
+
+  <main>
+    <h1 class="marca">textos<span class="ponto">.</span>etc<span class="ponto">.</span>br</h1>
+    <hr class="regua">
+    <p class="breve">Em breve.</p>
+  </main>
+
+  <footer class="rodape">
+    <span class="colofao">textos.etc.br&nbsp;·&nbsp;2026</span>
+    <span class="contato">
+      <a href="mailto:contato&#64;textos.etc.br"><span class="rotulo">contato&#64;textos.etc.br</span></a>
+      <a href="https://wa.me/5511910668920?text=Ol%C3%A1%2C%20eu%20gostaria%20de%20solicitar%20um%20or%C3%A7amento"><span class="rotulo">WhatsApp</span><svg class="selo selo-balao" viewBox="0 0 720 720" fill="currentColor" aria-hidden="true"><path d="M360,0C161.18,0,0,161.18,0,360c0,65.41,17.45,126.75,47.94,179.61L0,720l187.02-44.21c51.34,28.18,110.28,44.21,172.98,44.21,198.82,0,360-161.18,360-360S558.82,0,360,0ZM360,655.52c-60.17,0-116.13-17.98-162.82-48.87l-110.49,28.14,30.99-105.61c-33.53-47.93-53.2-106.26-53.2-169.19,0-163.21,132.31-295.52,295.52-295.52s295.52,132.31,295.52,295.52-132.31,295.52-295.52,295.52Z"/><path d="M444.35,407.52l87.1,41.06c4,1.88,6.56,5.94,6.2,10.34-.94,11.46-5.54,34.43-26.13,55.02-58.12,58.12-162.49-7.64-166.74-10.18-25.67-13.79-50.06-32.24-73.19-55.36-23.12-23.12-41.58-47.52-55.37-73.19-2.55-4.24-68.31-108.61-10.18-166.74,20.59-20.59,43.56-25.19,55.02-26.13,4.41-.36,8.46,2.2,10.34,6.2l41.07,87.1c1.94,4.12,1.09,9.02-2.13,12.24l-30.61,30.61c-6.62,6.62-8.56,16.93-4,25.11,11.17,20.03,26.19,39.32,43.59,57.07,17.75,17.4,37.04,32.43,57.07,43.59,8.18,4.56,18.48,2.62,25.11-4l30.61-30.61c3.22-3.22,8.12-4.08,12.24-2.13Z"/></svg></a>
+      <a href="https://instagram.com/textos.etc.br" rel="me"><span class="rotulo">Instagram</span><svg class="selo selo-quadro" viewBox="0 0 1000 1000" fill="currentColor" aria-hidden="true"><path d="M295.42,6c-53.2,2.51-89.53,11-121.29,23.48-32.87,12.81-60.73,30-88.45,57.82S40.89,143,28.17,175.92c-12.31,31.83-20.65,68.19-23,121.42S2.3,367.68,2.56,503.46,3.42,656.26,6,709.6c2.54,53.19,11,89.51,23.48,121.28,12.83,32.87,30,60.72,57.83,88.45S143,964.09,176,976.83c31.8,12.29,68.17,20.67,121.39,23s70.35,2.87,206.09,2.61,152.83-.86,206.16-3.39S799.1,988,830.88,975.58c32.87-12.86,60.74-30,88.45-57.84S964.1,862,976.81,829.06c12.32-31.8,20.69-68.17,23-121.35,2.33-53.37,2.88-70.41,2.62-206.17s-.87-152.78-3.4-206.1-11-89.53-23.47-121.32c-12.85-32.87-30-60.7-57.82-88.45S862,40.87,829.07,28.19c-31.82-12.31-68.17-20.7-121.39-23S637.33,2.3,501.54,2.56,348.75,3.4,295.42,6m5.84,903.88c-48.75-2.12-75.22-10.22-92.86-17-23.36-9-40-19.88-57.58-37.29s-28.38-34.11-37.5-57.42c-6.85-17.64-15.1-44.08-17.38-92.83-2.48-52.69-3-68.51-3.29-202s.22-149.29,2.53-202c2.08-48.71,10.23-75.21,17-92.84,9-23.39,19.84-40,37.29-57.57s34.1-28.39,57.43-37.51c17.62-6.88,44.06-15.06,92.79-17.38,52.73-2.5,68.53-3,202-3.29s149.31.21,202.06,2.53c48.71,2.12,75.22,10.19,92.83,17,23.37,9,40,19.81,57.57,37.29s28.4,34.07,37.52,57.45c6.89,17.57,15.07,44,17.37,92.76,2.51,52.73,3.08,68.54,3.32,202s-.23,149.31-2.54,202c-2.13,48.75-10.21,75.23-17,92.89-9,23.35-19.85,40-37.31,57.56s-34.09,28.38-57.43,37.5c-17.6,6.87-44.07,15.07-92.76,17.39-52.73,2.48-68.53,3-202.05,3.29s-149.27-.25-202-2.53m407.6-674.61a60,60,0,1,0,59.88-60.1,60,60,0,0,0-59.88,60.1M245.77,503c.28,141.8,115.44,256.49,257.21,256.22S759.52,643.8,759.25,502,643.79,245.48,502,245.76,245.5,361.22,245.77,503m90.06-.18a166.67,166.67,0,1,1,167,166.34,166.65,166.65,0,0,1-167-166.34" transform="translate(-2.5 -2.5)"/></svg></a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
